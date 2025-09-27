@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSmart Waste Management</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="icon" href="Green Website Icon on Gradient Square (1).png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; }
+    section { padding: 3rem 1rem; max-width: 1100px; margin: auto; }
+    input, textarea, button { display: block; margin: 1rem 0; padding: .7rem; width: 100%; border-radius: 8px; border: 1px solid #ccc; }
+    button { background: #2e7d32; color: white; font-weight: bold; cursor: pointer; border: none; }
+    button:hover { background: #1b5e20; }
+    footer { background: #1b5e20; color: white; padding: 1rem; text-align: center; margin-top: 2rem; }
+    .hero { background: #e8f5e9; padding: 4rem 2rem; text-align: center; border-radius: 12px; }
+    .hero .btn { background: #2e7d32; padding: .7rem 1.5rem; border-radius: 8px; color: white; text-decoration: none; }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #2e7d32;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    .preloader.fade-out { opacity: 0; pointer-events: none; }
+    .preloader h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      animation: glow 1.5s infinite alternate;
+    }
+    .preloader-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+    }
+    .designed-by {
+      font-size: 1rem;
+      margin-top: 10px;
+      font-style: italic;
+      opacity: 0.9;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 20px #c8e6c9; }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,255,255,0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <img style="height: 50px;" src="Green Website Icon on Gradient Square (1).png" alt=""><h1>EcoSmart</h1>
+    <img src="flourish.jpg" alt="Flourish Okafor" class="preloader-img">
+    <p class="designed-by">Designed by Flourish Okafor</p>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#2e7d32;">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#home"><img style="height: 80px;" src="Green Website Icon on Gradient Square (1).png" alt=""> EcoSmart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#categorizer">Categorizer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#report">Report</a></li>
+          <li class="nav-item"><a class="nav-link" href="#map">Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stats">Statistics</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h2>Together for a Cleaner Future 🌱</h2>
+    <p>Manage, recycle, and reduce waste smarter with EcoSmart solutions.</p>
+    <a href="#categorizer" class="btn">Try Waste Categorizer</a>
+  </section>
+
+  <!-- Categorizer Section -->
+  <section id="categorizer">
+    <h2>♻️ Waste Categorizer</h2>
+    <input type="text" id="wasteInput" placeholder="e.g., Plastic bottle, Food scraps">
+    <button onclick="categorizeWaste()">Categorize</button>
+    <p id="result"></p>
+  </section>
+
+  <!-- Report Section -->
+  <section id="report">
+    <h2>🚮 Report Improper Waste Disposal</h2>
+    <form onsubmit="submitReport(event)">
+      <input type="text" id="location" placeholder="Location" required>
+      <textarea id="description" placeholder="Describe the issue" required></textarea>
+      <input type="file" id="photo" accept="image/*">
+      <button type="submit">Submit Report</button>
+    </form>
+    <p id="reportMsg"></p>
+  </section>
+
+  <!-- Map Section -->
+  <section id="map">
+    <h2>🗺️ Nearby Recycling Centers</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="400" style="border:0; border-radius:12px;" allowfullscreen loading="lazy"></iframe>
+  </section>
+
+  <!-- Statistics Section -->
+  <section id="stats">
+    <h2>📊 Waste Statistics</h2>
+    <canvas id="wasteChart" width="400" height="200"></canvas>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>ℹ️ About EcoSmart</h2>
+    <p>EcoSmart Waste Management is dedicated to reducing pollution through smart technology and education. Our platform helps users recycle, compost, and report improper waste disposal.</p>
+    <h3>Tips for Waste Management</h3>
+    <ul>
+      <li>♻️ Recycle plastics, paper, and metals properly.</li>
+      <li>🌱 Compost food and organic waste.</li>
+      <li>🛑 Reduce single-use items.</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>📬 Contact Us</h2>
+    <form onsubmit="contactSubmit(event)">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <p id="contactMsg"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 EcoSmart Waste Management | All Rights Reserved</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Waste categorizer (new logic embedded)
+    function categorizeWaste(){
+      const waste = document.getElementById('wasteInput').value.toLowerCase().trim();
+      if(!waste) return document.getElementById('result').innerText = '⚠️ Please enter a type of waste.';
+
+      const recycleItems = ['plastic','glass','metal','paper','aluminum','cardboard'];
+      const compostItems = ['food','fruit','vegetable','organic','scraps','leaves'];
+
+      if (recycleItems.some(item => waste.includes(item))){
+        document.getElementById('result').innerText = '♻️ Recycle this item at your nearest recycling bin.';
+      } else if (compostItems.some(item => waste.includes(item))){
+        document.getElementById('result').innerText = '🌱 This can be composted to reduce organic waste.';
+      } else {
+        document.getElementById('result').innerText = '🗑️ Dispose in landfill waste bin.';
+      }
+    }
+
+    // Report form
+    function submitReport(event){
+      event.preventDefault();
+      const location = document.getElementById('location').value;
+      const description = document.getElementById('description').value;
+      const photo = document.getElementById('photo').files[0];
+      let msg = `✅ Report submitted for ${location}: ${description}`;
+      if(photo) msg += ' (Photo attached)';
+      document.getElementById('reportMsg').innerText = msg;
+      event.target.reset();
+    }
+
+    // Contact form
+    function contactSubmit(event){
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      document.getElementById('contactMsg').innerText = `📩 Thank you ${name}! We will reply to ${email} soon.`;
+      event.target.reset();
+    }
+
+    // Chart.js statistics
+    if(document.getElementById('wasteChart')){
+      const ctx = document.getElementById('wasteChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Recycle', 'Compost', 'Landfill'],
+          datasets: [{
+            label: 'Waste Processed (kg)',
+            data: [120, 90, 150],
+            backgroundColor: ['#4caf50','#ffc107','#f44336']
+          }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+      });
+    }
+
+    // Preloader
+    window.addEventListener("load", () => {
+      const preloader = document.querySelector(".preloader");
+      setTimeout(() => {
+        preloader.classList.add("fade-out");
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 500);
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
